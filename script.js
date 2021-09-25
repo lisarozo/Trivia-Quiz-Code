@@ -54,7 +54,7 @@ var timerEl = document.getElementById('countdown');
 
 // Timer that counts down from 10
 function countdown() {
-  var timeLeft = 10;
+  var timeLeft = 100;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function() {
@@ -76,6 +76,10 @@ function countdown() {
       // Call the `displayMessage()` function
       
     }
+
+    if(questionIndex >= questions.length) {
+      clearInterval(timeInterval)
+    }
   }, 1000);
 }
 
@@ -83,6 +87,25 @@ function countdown() {
 
 startBtn.onclick = countdown;
 
+function checkAnswer() {
+  console.log(this.textContent)
+  var chosenAnswer = this.textContent;
 
+  if(chosenAnswer == questions[questionIndex].correctAnswer) {
+    console.log("correct")
+  }else {
+    console.log("incorrect")
+  }
+
+  questionIndex++;
+  if(questionIndex < questions.length) {
+    showQuestion()
+  }
+}
 
 document.querySelector("#startBtn").addEventListener("click", startTheQuiz)
+
+document.querySelector("#choiceOne").addEventListener("click", checkAnswer)
+document.querySelector("#choiceTwo").addEventListener("click", checkAnswer)
+document.querySelector("#choiceThree").addEventListener("click", checkAnswer)
+document.querySelector("#choiceFour").addEventListener("click", checkAnswer)
