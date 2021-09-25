@@ -26,7 +26,7 @@ var questions = [
     },
 
 ]
-
+var score=50 
 // var exampleArr= [12, 32, 45, 8]
 
 var questionsEl = document.getElementById('questions');
@@ -54,7 +54,7 @@ var timerEl = document.getElementById('countdown');
 
 // Timer that counts down from 10
 function countdown() {
-  var timeLeft = 100;
+  var timeLeft = 10;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function() {
@@ -68,16 +68,27 @@ function countdown() {
       // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
       timerEl.textContent = timeLeft + ' second remaining';
       timeLeft--;
-    } else {
+    } else { 
       // Once `timeLeft` gets to 0, set `timerEl` to an empty string
       timerEl.textContent = '';
       // Use `clearInterval()` to stop the timer
       clearInterval(timeInterval);
       // Call the `displayMessage()` function
-      
+      alert("The End")
+      var initials = prompt("Please Enter Your Initials")
+      localStorage.setItem("initials", initials);
+      localStorage.setItem("score", score)
+      window.location.reload();
+      clearInterval(timeInterval)
     }
 
     if(questionIndex >= questions.length) {
+     var initials = prompt("Please Enter your Initials")
+    localStorage.setItem("initials", initials);
+      localStorage.setItem("score", score)
+      // localStorage.setItem("Highest Score", Highest Score)
+     window.location.reload();
+      
       clearInterval(timeInterval)
     }
   }, 1000);
@@ -87,12 +98,15 @@ function countdown() {
 
 startBtn.onclick = countdown;
 
+
 function checkAnswer() {
   console.log(this.textContent)
   var chosenAnswer = this.textContent;
 
   if(chosenAnswer == questions[questionIndex].correctAnswer) {
     console.log("correct")
+    score++
+    console.log(score)
   }else {
     console.log("incorrect")
   }
