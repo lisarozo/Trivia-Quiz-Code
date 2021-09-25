@@ -54,7 +54,7 @@ var timerEl = document.getElementById('countdown');
 
 // Timer that counts down from 10
 function countdown() {
-  var timeLeft = 10;
+  var timeLeft = 30;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function() {
